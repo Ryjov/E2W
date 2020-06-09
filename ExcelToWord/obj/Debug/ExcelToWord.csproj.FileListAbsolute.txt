@@ -1,0 +1,16 @@
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\bin\Debug\ExcelToWord.exe.config
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\bin\Debug\ExcelToWord.exe
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\bin\Debug\ExcelToWord.pdb
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.csprojAssemblyReference.cache
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\MainWindow.g.cs
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\App.g.cs
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord_Content.g.cs
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord_MarkupCompile.cache
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord_MarkupCompile.lref
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\MainWindow.baml
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.g.resources
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.Properties.Resources.resources
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.csproj.GenerateResource.cache
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.csproj.CoreCompileInputs.cache
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.exe
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.pdb
