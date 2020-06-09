@@ -35,8 +35,8 @@ namespace ExcelToWord
         }
         int availability = 0;
         OpenFileDialog ofd = new OpenFileDialog();
-        String markertosearch = ("([\\<])#([0-9]*)#([A-Z]*[0-9]*)([\\>])");
         public string wordpathfolder = " ";//лучше сохранять в папку экселя
+        public string excelpathfolder = " ";
         private void wordpathbutton_Click(object sender, RoutedEventArgs e)
         {
             ofd.Filter = "Word Documents|* .doc; *.docx";
@@ -51,57 +51,19 @@ namespace ExcelToWord
         {
             ofd.Filter = "Excel Worksheets| *.xls; *.xlsx";
             if (ofd.ShowDialog() == true)
+            {
                 excelpath.Text = (ofd.FileName);
+                excelpathfolder = System.IO.Path.GetDirectoryName(ofd.FileName);
+            }
         }
 
         public void executebutton_Click(object sender, RoutedEventArgs e)
         {
-            object fileName = System.IO.Path.Combine(@wordpath.Text);
-            Word.Application wordApp = new Microsoft.Office.Interop.Word.Application { Visible = false };
-            wordApp.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone;
-            Word.Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
-            wordDoc.Activate();
-            Regex markerRegEx = new Regex(@"<#\d+#[A-Z]+\d+>");
-            string rangeText = wordDoc.Range().Text;
-            MatchCollection markerMatches = markerRegEx.Matches(rangeText);
-            Excel.Application excApp = new Microsoft.Office.Interop.Excel.Application { Visible = false };
-            excApp.DisplayAlerts = false;
-            Excel.Workbook excBook = excApp.Workbooks.Add(@excelpath.Text);
-            try
-            {
-                foreach (Match match in markerMatches)
-                {
-                    Regex sheetRegEx = new Regex(@"#\d+#");
-                    Regex cellRegEx = new Regex(@"#[A-Z]+\d+>");
-                    int sheet = Int32.Parse(sheetRegEx.Match(match.Value).Value.Trim('#'));
-                    Excel.Worksheet excSheet = (excBook.Worksheets[sheet]);
-                    string cell = cellRegEx.Match(match.Value).Value.Trim('#','>');
-                    Excel.Range excRng;
-                    excRng = excSheet.get_Range(cell);
-                    FindAndReplaceClass.FindAndReplace(wordDoc, match.Value, excRng.Value2);
-                }
-                //aDoc.SaveAs2(@"ExcelToWordfile.docx");
-                wordDoc.SaveAs2("C:\\Users\\Егор\\Desktop\\диплом\\test\\doc1.doc");
-                wordDoc.Close();
-                wordDoc = null;
-                wordApp.Quit();
-                wordApp = null;
-                excBook.Close(0);
-                excApp.Quit();
-                eventlog.Text = eventlog.Text + "\n Завершено успешно";
-            }
-            catch
-            {
-                //wordApp.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone;
-                //excApp.DisplayAlerts = false;
-                wordDoc.Close();
-                wordDoc = null;
-                wordApp.Quit();
-                wordApp = null;
-                excBook.Close(0);
-                excApp.Quit();
-                eventlog.Text = eventlog.Text + "\n Произошла ошибка";
-            }
+            FindAndReplaceObject file = new FindAndReplaceObject(System.IO.Path.Combine(@wordpath.Text), System.IO.Path.Combine(@excelpath.Text), excelpathfolder);
+            if (file.FindAndReplace())
+                MessageBox.Show("Обработка успешно завершена");
+            else
+                MessageBox.Show("Во время работы программы произошла ошибка. Файлы не были обработаны");
         }
 
         private void leavewindow_Click(object sender, RoutedEventArgs e)

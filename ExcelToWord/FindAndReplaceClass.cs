@@ -11,33 +11,66 @@ using System.Windows;
 
 namespace ExcelToWord
 {
-    class FindAndReplaceClass
+    class FindAndReplaceObject
     {
-        public static void FindAndReplace(Word.Document doc, object findText, object replaceWithText)
+        private object wordFilePath;
+        private object excelFilePath;
+        private object outfilepathfolder;
+        public FindAndReplaceObject (object w, object e, object p) { wordFilePath = w; excelFilePath = e; outfilepathfolder = p; }
+        public bool FindAndReplace()
         {
-            Word.Range rng = doc.Content;
-            rng.Find.ClearFormatting();
-            //options
-            /*object matchCase = false;
-            object matchWholeWord = false;
-            object matchWildCards = true;
-            object matchSoundsLike = false;                                     // с этими опциями не заменялось
-            object matchAllWordForms = false;
-            object forward = true;
-            object format = false;*/
+            Word.Application wordApp = new Word.Application { Visible = false };
+            wordApp.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone;
+            Word.Document wordDoc = wordApp.Documents.Open(wordFilePath, ReadOnly: false, Visible: false);
+            //wordDoc.Activate();
+            Regex markerRegEx = new Regex(@"<#\d+#[A-Z]+\d+>");
+            string rangeText = wordDoc.Range().Text;
+            MatchCollection markerMatches = markerRegEx.Matches(rangeText);
+            Excel.Application excApp = new Excel.Application { Visible = false };
+            excApp.DisplayAlerts = false;
+            Excel.Workbook excBook = excApp.Workbooks.Add(excelFilePath);//какая-то хрень с защитой от файлов эксель закруженных с инета
             object missing = Type.Missing;
             object read_only = false;
             object visible = true;
             object wrap = 1;
-            //execute find and replace
-            //object smth = doc.Selection.Find;
-            rng.Find.Execute(ref findText, missing, missing, missing, missing, missing, missing, missing, missing, ref replaceWithText, 2);
+            Word.Range rng = wordDoc.Content;
+            rng.Find.ClearFormatting();
+            try
+            {
+                foreach (Match match in markerMatches)
+                {
+                    Regex sheetRegEx = new Regex(@"#\d+#");
+                    Regex cellRegEx = new Regex(@"#[A-Z]+\d+>");
+                    int sheet = Int32.Parse(sheetRegEx.Match(match.Value).Value.Trim('#'));
+                    Excel.Worksheet excSheet = (excBook.Worksheets[sheet]);
+                    string cell = cellRegEx.Match(match.Value).Value.Trim('#', '>');
+                    Excel.Range excRng;
+                    excRng = excSheet.get_Range(cell);
+                    rng.Find.Execute(match.Value, missing, missing, missing, missing, missing, missing, missing, missing, excRng.Value2, 2);
+                }
+                //aDoc.SaveAs2(@"ExcelToWordfile.docx");
+                //wordDoc.SaveAs2("C:\\Users\\Егор\\Desktop\\диплом\\test\\doc1.doc");
+                wordDoc.SaveAs2(outfilepathfolder + "\\out_file.doc");
+                wordDoc.Close();
+                wordDoc = null;
+                wordApp.Quit();
+                wordApp = null;
+                excBook.Close(0);
+                excApp.Quit();
+                return true;
+            }
+            catch
+            {
+                //wordApp.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone;
+                //excApp.DisplayAlerts = false;
+                wordDoc.Close();
+                wordDoc = null;
+                wordApp.Quit();
+                wordApp = null;
+                excBook.Close(0);
+                excApp.Quit();
+                return false;
+            }
         }
-
-        /*public static string Find(Word.Application doc, object findText)
-        {
-            doc.Selection.Find(findText);
-            return;
-        }*/
     }
 }
