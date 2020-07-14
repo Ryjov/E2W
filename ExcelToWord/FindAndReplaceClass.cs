@@ -28,7 +28,7 @@ namespace ExcelToWord
             MatchCollection markerMatches = markerRegEx.Matches(rangeText);
             Excel.Application excApp = new Excel.Application { Visible = false };
             excApp.DisplayAlerts = false;
-            Excel.Workbook excBook = excApp.Workbooks.Add(excelFilePath);//какая-то хрень с защитой от файлов эксель закруженных с инета
+            Excel.Workbook excBook = excApp.Workbooks.Add(excelFilePath);
             object missing = Type.Missing;
             object read_only = false;
             object visible = true;
@@ -50,7 +50,7 @@ namespace ExcelToWord
                 }
                 //aDoc.SaveAs2(@"ExcelToWordfile.docx");
                 //wordDoc.SaveAs2("C:\\Users\\Егор\\Desktop\\диплом\\test\\doc1.doc");
-                wordDoc.SaveAs2(outfilepathfolder + "\\out_file.doc");
+                wordDoc.SaveAs2($@"{outfilepathfolder}\out_file.doc");
                 wordDoc.Close();
                 wordDoc = null;
                 wordApp.Quit();

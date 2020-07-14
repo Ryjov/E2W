@@ -14,3 +14,13 @@ C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.csp
 C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.csproj.CoreCompileInputs.cache
 C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.exe
 C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.pdb
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\bin\Debug\ExcelToWord.exe.manifest
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\bin\Debug\ExcelToWord.application
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.exe.manifest
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.application
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\bin\Debug\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\bin\Debug\Microsoft.WindowsAPICodePack.Sensors.dll
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.dll
+C:\Users\Егор\source\repos\ExcelToWord\ExcelToWord\obj\Debug\ExcelToWord.csproj.CopyComplete

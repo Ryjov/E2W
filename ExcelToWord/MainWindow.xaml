@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExcelToWord"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="ExcelToWord" Height="450" Width="800"
         Background="#333"
         >
     <Window.Resources>
@@ -26,17 +26,35 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="7*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
         </Grid.RowDefinitions>
         <Button x:Name="wordpathbutton" Grid.Column="0" Grid.Row="0" Content="Выберите Word-файл" Click="wordpathbutton_Click" Style="{StaticResource PathButton}"></Button>
         <Button x:Name="excelpathbutton" Grid.Column="0" Grid.Row="1" Content="Выберите Excel-файл" Click="excelpathbutton_Click" Style="{StaticResource PathButton}"></Button>
-        <Button x:Name="executebutton" Grid.Column="0" Grid.Row="3" Content="Выполнить обработку" Click="executebutton_Click" Style="{StaticResource PathButton}"></Button>
-        <Button x:Name="leavewindow" Grid.Column="1" Grid.Row="3" Content="Перейти в другое окно" Click="leavewindow_Click" Style="{StaticResource PathButton}"></Button>
-        <TextBox x:Name="wordpath" Grid.Column="1" Grid.Row="0" Style="{StaticResource PathToFile}"></TextBox>
-        <TextBox x:Name="excelpath" Grid.Column="1" Grid.Row="1" Style="{StaticResource PathToFile}"></TextBox>
-        <Border Margin="5px" Background="White" BorderBrush="#333" BorderThickness="1" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
-            <TextBlock x:Name="eventlog"></TextBlock>
+        <Button x:Name="executebutton" IsEnabled="False" Grid.Row="2" Height="35" VerticalAlignment="Top" Grid.ColumnSpan="1" Content="Выполнить обработку" Click="executebutton_Click" Style="{StaticResource PathButton}"></Button>
+        <Grid x:Name="RadioGrid" Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.RowSpan="4" Foreground="#ffa500">Сохранить итоговый<LineBreak/>файл</TextBlock>
+            <RadioButton Foreground="#ffa500" GroupName="outfile" Content="В папку файла Word" Grid.Column="1" Grid.Row="0" x:Name="WordRadio"/>
+            <RadioButton Foreground="#ffa500" GroupName="outfile" Content="В папку файла Excel" Grid.Column="1" Grid.Row="1" IsChecked="True" x:Name="ExcelRadio"/>
+            <RadioButton Foreground="#ffa500" GroupName="outfile" Content="По адресу: " Grid.Column="1" Grid.Row="2" x:Name="PathRadio" Checked="PathRadioChecked" Unchecked="PathRadioUnchecked"/>
+            <Button x:Name="OutfilePathButton" Content="Выбрать папку" Grid.Column="2" Grid.Row="3" Width="100" Height="20" VerticalAlignment="Top" Click="OutfilePathButton_Click" Style="{StaticResource PathButton}"></Button>
+            <TextBox x:Name="OutfilePathText" Background="White" Grid.Column="2" Grid.Row="2" IsEnabled="False" Height="20" VerticalAlignment="Top"></TextBox>
+        </Grid>
+        <TextBox x:Name="wordpath" Grid.Column="1" Grid.Row="0" Style="{StaticResource PathToFile}" IsReadOnly="True"></TextBox>
+        <TextBox x:Name="excelpath" Grid.Column="1" Grid.Row="1" Style="{StaticResource PathToFile}" IsReadOnly="True"></TextBox>
+        <Border Margin="5px" Background="White" BorderBrush="#333" BorderThickness="1" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Visibility="Hidden">
+            <TextBox x:Name="eventlog" IsEnabled="False" Visibility="Hidden"></TextBox>
         </Border>
     </Grid>
 </Window>
