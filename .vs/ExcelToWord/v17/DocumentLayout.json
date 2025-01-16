@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\\u0415\u0433\u043E\u0440\\source\\E2W\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F1BEDCF0-FAA1-4024-B078-1D6C8F871C9D}|ExcelToWord\\ExcelToWord.csproj|c:\\users\\\u0435\u0433\u043E\u0440\\source\\e2w\\exceltoword\\findandreplaceclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1BEDCF0-FAA1-4024-B078-1D6C8F871C9D}|ExcelToWord\\ExcelToWord.csproj|solutionrelative:exceltoword\\findandreplaceclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1BEDCF0-FAA1-4024-B078-1D6C8F871C9D}|ExcelToWord\\ExcelToWord.csproj|c:\\users\\\u0435\u0433\u043E\u0440\\source\\e2w\\exceltoword\\replacer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1BEDCF0-FAA1-4024-B078-1D6C8F871C9D}|ExcelToWord\\ExcelToWord.csproj|solutionrelative:exceltoword\\replacer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1BEDCF0-FAA1-4024-B078-1D6C8F871C9D}|ExcelToWord\\ExcelToWord.csproj|C:\\Users\\\u0415\u0433\u043E\u0440\\source\\E2W\\exceltoword\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1BEDCF0-FAA1-4024-B078-1D6C8F871C9D}|ExcelToWord\\ExcelToWord.csproj|solutionrelative:exceltoword\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,13 +26,26 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\\u0415\u0433\u043E\u0440\\source\\E2W\\ExcelToWord\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "ExcelToWord\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\\u0415\u0433\u043E\u0440\\source\\E2W\\ExcelToWord\\MainWindow.xaml.cs",
+              "RelativeToolTip": "ExcelToWord\\MainWindow.xaml.cs",
+              "ViewState": "AQIAACkAAAAAAAAAAAAIwDwAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T10:21:12.1Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FindAndReplaceClass.cs",
-              "DocumentMoniker": "C:\\Users\\\u0415\u0433\u043E\u0440\\source\\E2W\\ExcelToWord\\FindAndReplaceClass.cs",
-              "RelativeDocumentMoniker": "ExcelToWord\\FindAndReplaceClass.cs",
-              "ToolTip": "C:\\Users\\\u0415\u0433\u043E\u0440\\source\\E2W\\ExcelToWord\\FindAndReplaceClass.cs",
-              "RelativeToolTip": "ExcelToWord\\FindAndReplaceClass.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Title": "Replacer.cs",
+              "DocumentMoniker": "C:\\Users\\\u0415\u0433\u043E\u0440\\source\\E2W\\ExcelToWord\\Replacer.cs",
+              "RelativeDocumentMoniker": "ExcelToWord\\Replacer.cs",
+              "ToolTip": "C:\\Users\\\u0415\u0433\u043E\u0440\\source\\E2W\\ExcelToWord\\Replacer.cs",
+              "RelativeToolTip": "ExcelToWord\\Replacer.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAC8AAABJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-11T08:46:54.917Z",
               "EditorCaption": ""

@@ -50,7 +50,7 @@ namespace ExcelToWord
         {
             if (ExcelRadio.IsChecked==true)
             {
-                FindAndReplaceObject file = new FindAndReplaceObject(System.IO.Path.Combine(@wordpath.Text), System.IO.Path.Combine(@excelpath.Text), excelpathfolder);
+                Replacer file = new Replacer(System.IO.Path.Combine(@wordpath.Text), System.IO.Path.Combine(@excelpath.Text), excelpathfolder);
                 if (file.FindAndReplace())
                     MessageBox.Show("Обработка успешно завершена");
                 else
@@ -58,7 +58,7 @@ namespace ExcelToWord
             }
             else if (WordRadio.IsChecked==true)
             {
-                FindAndReplaceObject file = new FindAndReplaceObject(System.IO.Path.Combine(@wordpath.Text), System.IO.Path.Combine(@excelpath.Text), wordpathfolder);
+                Replacer file = new Replacer(System.IO.Path.Combine(@wordpath.Text), System.IO.Path.Combine(@excelpath.Text), wordpathfolder);
                 if (file.FindAndReplace())
                     MessageBox.Show("Обработка успешно завершена");
                 else
@@ -66,7 +66,7 @@ namespace ExcelToWord
             }
             else if ((PathRadio.IsChecked==true)&&(!(String.IsNullOrEmpty(OutfilePathText.Text))))
             {
-                FindAndReplaceObject file = new FindAndReplaceObject(System.IO.Path.Combine(@wordpath.Text), System.IO.Path.Combine(@excelpath.Text), OutfilePathText.Text);
+                Replacer file = new Replacer(System.IO.Path.Combine(@wordpath.Text), System.IO.Path.Combine(@excelpath.Text), OutfilePathText.Text);
                 if (file.FindAndReplace())
                     MessageBox.Show("Обработка успешно завершена");
                 else
