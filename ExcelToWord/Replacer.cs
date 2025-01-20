@@ -10,6 +10,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
 using Text = DocumentFormat.OpenXml.Wordprocessing.Text;
+using System.IO;
 
 namespace ExcelToWord
 {
@@ -21,36 +22,48 @@ namespace ExcelToWord
         public Replacer(object w, object e, object p) { wordFilePath = w; excelFilePath = e; outfilepathfolder = p; }
         public bool FindAndReplace()
         {
-            using (WordprocessingDocument wordDoc = WordprocessingDocument.CreateFromTemplate((string)wordFilePath))
+            byte[] byteArray = File.ReadAllBytes((string)wordFilePath);
+            using (var stream = new MemoryStream())
             {
-                using (SpreadsheetDocument excDoc = SpreadsheetDocument.Open((string)excelFilePath, true))
+                stream.Write(byteArray, 0, byteArray.Length);
+                using (var wordDoc = WordprocessingDocument.Open(stream, true))
                 {
-                    var wordBody = wordDoc.MainDocumentPart.Document.Body;
-                    var paragraphs = wordBody.Elements<Paragraph>();
-                    Regex markerRegEx = new Regex(@"<#\d+#[A-Z]+\d+>");
-
-                    foreach (var paragraph in paragraphs)
+                    using (SpreadsheetDocument excDoc = SpreadsheetDocument.Open((string)excelFilePath, true))
                     {
-                        foreach (var run in paragraph.Elements<Run>())
+                        var wordBody = wordDoc.MainDocumentPart.Document.Body;
+                        var paragraphs = wordBody.Elements<Paragraph>();
+                        Regex markerRegEx = new Regex(@"<#\d+#[A-Z]+\d+>");
+
+                        foreach (var paragraph in paragraphs)
                         {
-                            foreach (var text in run.Elements<Text>())
+                            foreach (var run in paragraph.Elements<Run>())
                             {
-                                MatchCollection markerMatches = markerRegEx.Matches(text.Text);
-
-                                foreach (Match match in markerMatches)
+                                foreach (var text in run.Elements<Text>())
                                 {
-                                    Regex sheetRegEx = new Regex(@"#\d+#");
-                                    Regex cellRegEx = new Regex(@"#[A-Z]+\d+>");
-                                    int sheet = Int32.Parse(sheetRegEx.Match(match.Value).Value.Trim('#'));
-                                    string cell = cellRegEx.Match(match.Value).Value.Trim('#', '>');
-                                    string relationshipId = excDoc.WorkbookPart.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.SheetId.Equals(sheet))?.Id;
+                                    MatchCollection markerMatches = markerRegEx.Matches(text.Text);
 
-                                    text.Text.Replace(match.Value, cell);
+                                    foreach (Match match in markerMatches)
+                                    {
+                                        Regex sheetRegEx = new Regex(@"#\d+#");
+                                        Regex cellRegEx = new Regex(@"#[A-Z]+\d+>");
+                                        int sheetIndex = Int32.Parse(sheetRegEx.Match(match.Value).Value.Trim('#'));
+                                        string cellIndex = cellRegEx.Match(match.Value).Value.Trim('#', '>');
+                                        var sheet = excDoc.WorkbookPart.Workbook.Sheets.ChildElements.FirstOrDefault(x => ((Sheet)x).SheetId == sheetIndex);
+                                        var cellValue = sheet.ChildElements.
+
+                                        text.Text = text.Text.Replace(match.Value, cell);
+                                    }
                                 }
                             }
                         }
                     }
+
+                    wordDoc.Save();
                 }
+
+                stream.Position = 0;
+                File.WriteAllBytes($@"{outfilepathfolder}\out_file.docx", stream.ToArray());
+
                 return true;
             }
             return false;
