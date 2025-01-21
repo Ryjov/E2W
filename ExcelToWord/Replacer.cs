@@ -48,10 +48,13 @@ namespace ExcelToWord
                                         Regex cellRegEx = new Regex(@"#[A-Z]+\d+>");
                                         int sheetIndex = Int32.Parse(sheetRegEx.Match(match.Value).Value.Trim('#'));
                                         string cellIndex = cellRegEx.Match(match.Value).Value.Trim('#', '>');
-                                        var sheet = excDoc.WorkbookPart.Workbook.Sheets.ChildElements.FirstOrDefault(x => ((Sheet)x).SheetId == sheetIndex);
-                                        var cellValue = sheet.ChildElements.
+                                        WorkbookPart wbPart = excDoc.WorkbookPart;
+                                        Sheet theSheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.SheetId == sheetIndex);
+                                        WorksheetPart wsPart = (WorksheetPart)(wbPart.GetPartById(theSheet.Id));
+                                        Cell cell = wsPart.Worksheet.Descendants<Cell>().FirstOrDefault(c => c.CellReference == cellIndex);
+                                        var value = cell.CellValue.Text;
 
-                                        text.Text = text.Text.Replace(match.Value, cell);
+                                        text.Text = text.Text.Replace(match.Value, value);
                                     }
                                 }
                             }
