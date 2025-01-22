@@ -52,9 +52,19 @@ namespace ExcelToWord
                                         Sheet theSheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.SheetId == sheetIndex);
                                         WorksheetPart wsPart = (WorksheetPart)(wbPart.GetPartById(theSheet.Id));
                                         Cell cell = wsPart.Worksheet.Descendants<Cell>().FirstOrDefault(c => c.CellReference == cellIndex);
-                                        var value = cell.CellValue.Text;
 
-                                        text.Text = text.Text.Replace(match.Value, value);
+                                        var value = cell.InnerText;
+
+                                        if (!(cell.DataType is null))
+                                        {
+                                            if (cell.DataType.Value == CellValues.SharedString)
+                                            {
+                                                var stringTable = wbPart.GetPartsOfType<SharedStringTablePart>().FirstOrDefault();
+                                                value = stringTable.SharedStringTable.ElementAt(int.Parse(value)).InnerText;
+
+                                                text.Text = text.Text.Replace(match.Value, value);
+                                            }
+                                        }
                                     }
                                 }
                             }

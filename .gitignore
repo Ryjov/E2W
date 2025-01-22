@@ -191,3 +191,4 @@ StyleCop.Cache
 bin
 obj
 .vs/ExcelToWord/FileContentIndex
+.vs/ExcelToWord/v17/DocumentLayout.json
