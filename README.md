@@ -30,28 +30,24 @@ executebutton will become available.
 Before pressing executebutton, user can choose from three options of where to save the endfile. 
 If he picks option to manually choose save location, the OutfilePathText textbox will become available.
 Upon clicking execute button, application will check which of three saving options have been chosen. 
-Then it will create a new FindAndReplaceObject(this class and its contents is described in the next section)-type object and give it path to Word file, path to Excel file and - 
+Then it will create a new Replacer(this class and its contents is described in the next section)-type object and give it path to Word file, path to Excel file and - 
 depending on which saving option was chosen - path to Word file folder, Excel file folder or custom folder as parameters.
 It will then run this object through FindAndReplace method and show user message if modification was completed succesfully or not.
 
-FindAndReplaceObject class contains code that reads and modifies files.
-In order to interact with Word and Excel files, this app uses Microsoft.Office.Interop.Word and Microsoft.Office.Interop.Excel libraries.
-FindAndReplaceObject class consists of three fields - wordFilePath, excelFilePath, outfilepathfolder first two contain paths to files that will be processed
+Replacer class contains code that reads and modifies files.
+In order to interact with Word and Excel files, this app uses OpenXml libraries.
+Replacer class consists of three fields - wordFilePath, excelFilePath, outfilepathfolder first two contain paths to files that will be processed
 and last contains path where endfile will be saved - and one method named FindAndReplace.
-When running FindAndReplace, the app first opens new word application and document. 
-Then, to search for markers in text, a new Regex regular expression is created that will match needed text (<#\d+#[A-Z]+\d+>).
-Text of a word document is then written into a new string object.
-All matches to a regular expressions are saved into new MatchCollection object.
-Now app opens a new excel application and table.
-A new Microsoft.Office.Interop.Word.Range object is created that covers all of Word document.
-Try-catch construction is started here that will close all opened apps and documents and show user error message in case of error.
-A cycle starts here that, for every found match in word document will find corresponding cell in excel table and replace this match with the value of that cell.
-It works by finding in each match information about needed sheet and cell using, once again, regular expressions.
-Sheet number is then written into new int object and in opened Excel table that sheet number is opened.
-Cell name is then written into string object and a new Range object is created that covers the cell with that same name.
-Then app calls Find.Execute method of Range object that covers all of Word document. 
-Parameter match.Value tells this method to search for instances of that value in text. 
-Parameter excRng.Value2 tells this method that this value is replacement text.
-Finally parameter 2 tells this method that all instances of match.Value should be replaced with excRng.Value2 (alternatives are: 0 - nothing will be replace, 1 - only first instance will be replaced).
+When running FindAndReplace, the app reads byte data from chosen Word document, which is then written into a memory stream.
+Then that stream is used to create a WordprocessingDocument where all the changes will be made.
+Similarily to word doc, then we open an excel spreadsheet using SpreadsheetDocument object to read the data that we will transfer to out final document.
+To search for markers in text, a new Regex regular expression is created that will match needed text (<#\d+#[A-Z]+\d+>).
+To scan a word doc for markers we have to go through each Paragraph's Run element and additionally through each Text element of these Run elements.
+All matches to a regular expressions within a Text element are saved into new MatchCollection object.
+A cycle starts here that, for every found match will find corresponding cell in excel table and replace this match with the value of that cell.
+It works by finding in each match information about needed sheet and cell using regular expressions.
+Sheet number is written into new int object and cell reference is written into a new string object.
+Using LINQ we Find needed sheet and by going down its tree of objects we can find a needed cerll value.
+If cell value is of numeric type we can simply retrieve its value, but if its of type string or bool then we need to do a data conversion.
+(for now lets assume that values in excel are either numeric or string - without boolean values)
 The cycle is then repeated for all detected regular expressions matches.
-Endfile is then saved and all opened applications and files are closed.

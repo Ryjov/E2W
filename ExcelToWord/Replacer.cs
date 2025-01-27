@@ -55,7 +55,7 @@ namespace ExcelToWord
 
                                         var value = cell.InnerText;
 
-                                        if (!(cell.DataType is null))
+                                        if (cell.DataType is not null)
                                         {
                                             if (cell.DataType.Value == CellValues.SharedString)
                                             {
@@ -64,6 +64,10 @@ namespace ExcelToWord
 
                                                 text.Text = text.Text.Replace(match.Value, value);
                                             }
+                                        }
+                                        else
+                                        {
+                                            text.Text = text.Text.Replace(match.Value, value);
                                         }
                                     }
                                 }

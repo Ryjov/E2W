@@ -192,3 +192,8 @@ bin
 obj
 .vs/ExcelToWord/FileContentIndex
 .vs/ExcelToWord/v17/DocumentLayout.json
+ExcelToWord/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+ExcelToWord/obj/Debug/ExcelToWord_MarkupCompile.cache
+ExcelToWord/excelexample.xlsx
+.vs/ExcelToWord/DesignTimeBuild/.dtbcache.v2
+.vs/ExcelToWord/DesignTimeBuild/.dtbcache.v2
